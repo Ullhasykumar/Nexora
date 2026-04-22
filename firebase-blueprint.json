@@ -1,0 +1,65 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Basic academic and personal info of the student",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string" },
+        "collegeName": { "type": "string" },
+        "branch": { "type": "string" },
+        "currentSemester": { "type": "integer" },
+        "totalCreditsPerSemester": { "type": "integer" },
+        "gradingScale": { "type": "string", "enum": ["10-point", "percentage"] },
+        "universityName": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["fullName", "collegeName", "branch", "currentSemester"]
+    },
+    "Subject": {
+      "title": "Subject",
+      "description": "Information about a specific academic subject",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "credits": { "type": "integer" },
+        "maxInternal": { "type": "integer" },
+        "maxExternal": { "type": "integer" },
+        "internalScore": { "type": "integer" },
+        "externalScore": { "type": "integer" },
+        "targetGrade": { "type": "string" }
+      }
+    },
+    "Project": {
+      "title": "Student Project",
+      "description": "Final year or major project details",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "teamSize": { "type": "integer" },
+        "domain": { "type": "string" },
+        "hardware": { "type": "string" },
+        "startMonth": { "type": "string" },
+        "deadlineMonth": { "type": "string" },
+        "milestones": { 
+          "type": "array",
+          "items": { "type": "object" }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}/profile": {
+      "schema": "UserProfile",
+      "description": "Student's core academic profile"
+    },
+    "/users/{userId}/subjects": {
+      "schema": "Subject",
+      "description": "Current semester subjects"
+    },
+    "/users/{userId}/project": {
+      "schema": "Project",
+      "description": "Student project details"
+    }
+  }
+}
